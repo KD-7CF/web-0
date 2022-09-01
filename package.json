@@ -1,0 +1,21 @@
+{
+	"name": "websim",
+	"version": "1.0.0",
+	"description": "Project websim - dynamic page: random movement of balls",
+	"main": "websim.js",
+	"type": "module",
+	"scripts": {
+		"start": "node websim.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+ssh://git@github.com/KD-7CF/websim.git"
+	},
+	"author": "KD-7CF",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/KD-7CF/websim/issues"
+	},
+	"homepage": "https://github.com/KD-7CF/websim#readme"
+}

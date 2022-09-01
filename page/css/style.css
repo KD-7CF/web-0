@@ -1,0 +1,39 @@
+body {
+	color: rgba(255,255,255,1);
+	background-color: rgba(100,100,100,1);	
+
+}
+header {
+	position: absolute;
+	top: 	10%;
+	left: 10%;
+	width: 83%;
+	height: 20%;
+	min-height: 80px;
+	border-radius: 2.5%/50%;
+	margin:0% auto auto 0%;
+	background-color: rgba(50,50,50,1);
+}
+
+.screen {
+	position: absolute;
+	top: 	37%;
+	left: 10%;
+	width: 83%;
+	height: 50%;
+	min-height: 80px;
+	border-radius: 2.5%/50%;
+	margin:0% auto auto 0%;
+	background-color: rgba(50,50,50,1);
+}
+
+.btn-play {
+	position: absolute;
+	top: 25%;
+	left: 50%;
+	width: 50px;
+	height: 50px;
+	font-size:120%;
+	color: rgba(255,255,255,1);
+	background-color: rgba(0,0,0,1);
+}
