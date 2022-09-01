@@ -7,7 +7,8 @@ class sim {
 
 	#play() {
 		if(!this.#ok) {
-			this.#arrayballs = B.createballs(10);
+			let n = window.prompt("number of balls: ");  
+			this.#arrayballs = B.createballs(isNaN(n) ? 1 : n);
 			this.#ok = true;
 		} else {
 			B.destroyballs(this.#arrayballs);
