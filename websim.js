@@ -10,6 +10,7 @@ const listFiles = {
 	'/page/js/sim.js': 'text/javascript',
 	'/page/js/ball.js': 'text/javascript',
 	'/page/js/worker.js': 'text/javascript',
+	'/page/js/geom.js': 'text/javascript'
 }
 
 server
@@ -29,6 +30,36 @@ server
 	})
 	.on('connection', (stream) => console.log('someone connected!'))
 	.listen(port, host, () => console.log(`server running at http://${host}:${port}`));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

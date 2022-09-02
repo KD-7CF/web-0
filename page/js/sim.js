@@ -1,4 +1,4 @@
-import * as B from '/page/js/ball.js'
+import * as B from '/page/js/ball.js';
 
 class sim {
 
@@ -7,7 +7,7 @@ class sim {
 
 	#play() {
 		if(!this.#ok) {
-			let n = window.prompt("number of balls: ");  
+			let n = window.prompt("number of balls: "); 
 			this.#arrayballs = B.createballs(isNaN(n) ? 1 : n);
 			this.#ok = true;
 		} else {
@@ -22,6 +22,24 @@ class sim {
 }
 
 const o = new sim();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

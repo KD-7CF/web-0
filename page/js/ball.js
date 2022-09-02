@@ -1,11 +1,12 @@
-let N = 10001;
+import {geom} from '/page/js/geom.js';
 
-export class ball {
+let N = 1001;
+
+export class ball extends geom{	
 	#id;
-	#x;
-	#y;
 	#worker;
 	static #htmlcss = '';
+	static #arraypts = [];
 
 	#init_htmlcss() {
 		ball.#htmlcss += 
@@ -13,8 +14,8 @@ export class ball {
 		<style>
 			#circle${this.#id} {
 				position: absolute;
-				left:${this.#x}%;
-				top: ${this.#y}%;
+				left:${this.x}%;
+				top: ${this.y}%;
 				width: 1em;
 				height: 1em;
 				border-radius: 50%/50%;
@@ -24,32 +25,49 @@ export class ball {
 		</style>
 		<div id="circle${this.#id}"></div>
 		`;
+
 		document.getElementsByClassName("screen")[0].innerHTML = ball.#htmlcss;
 	}
+
 	#update() {
-		document.getElementById(`circle${this.#id}`).style.left =`${this.#x}%`;
-		document.getElementById(`circle${this.#id}`).style.top = `${this.#y}%`;
+
+		if(ball.#arraypts == undefined)
+			return;
+		for(let pt1 of ball.#arraypts) {
+			let pt2 = new geom(this.x, this.y);
+			if(this.in_area(pt1, pt2, 1)) {
+				this.#worker.postMessage('bounce');
+				this.#worker.postMessage([this.x, this.y]);
+				console.log(`collusion: ${pt1.x} : ${pt1.y} >< ${pt2.x} : ${pt2.y}`);
+			}
+		}
+		document.getElementById(`circle${this.#id}`).style.left =`${this.x}%`;
+		document.getElementById(`circle${this.#id}`).style.top = `${this.y}%`;
+		ball.#arraypts[this.#id].x = this.x;
+		ball.#arraypts[this.#id].y = this.y;
 	}
-	constructor(id, x, y) {
+
+	constructor(x, y, id) {
+		super(x, y);
 		this.#id = id;
-		this.#x = x;
-		this.#y = y;
-		this.#worker = new Worker('/page/js/worker.js');
+		this.#worker = new Worker('/page/js/worker.js', {type: 'module'});
 		this.#worker.onmessage = (e) => {
 			switch(e.data) {
 				case 'clear':
 					ball.#htmlcss = '';
+					ball.#arraypts = [];
 					break;
 				default:
-					this.#x = e.data[0];
-					this.#y = e.data[1];
-					console.log(`x: ${this.#x} | y: ${this.#y}`);
+					this.x = e.data[0];
+					this.y = e.data[1];
+					//	console.log(`x: ${this.x} | y: ${this.y}`);
 					this.#update();
 			}
 		}
-		this.#worker.postMessage([this.#x, this.#y]);
+		this.#worker.postMessage([this.x, this.y]);
 		this.#worker.postMessage('run');
 		this.#init_htmlcss();
+		ball.#arraypts.push(new geom());
 	}
 
 	destructor() {
@@ -61,12 +79,11 @@ export class ball {
 export function createballs(n) {
 
 	let arrayballs = [];
-
 	for(let i = 0; i < n ;i++)
 		arrayballs.push(new ball(
-			i,
 			Math.floor((Math.random() * N) % 95), 
-			Math.floor((Math.random() * N) % 85)
+			Math.floor((Math.random() * N) % 85),
+			i
 		));
 	return arrayballs;
 }
