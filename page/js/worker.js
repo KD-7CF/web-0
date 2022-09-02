@@ -70,7 +70,7 @@ class worker {
 	}
 }
 const wrk = new worker();
-wrk.excec(100);
+wrk.excec(10);
 
 
 
